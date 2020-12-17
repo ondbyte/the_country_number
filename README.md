@@ -35,14 +35,18 @@ print(country.currency);//prints INR
 ```
 further you can parse realtime in flutter on input data changed
 ```dart
+final theNumber = TheCountryNumber().parse(iso2Code:"AE");
 onChanged(s){
-  final theNumber = TheCountryNumber().parse(internationalNumber:s);
-  if(theNumber==null){
+  ///consider s = "565656565";
+  if(s.isEmpty()){
     return;
   }
+  final newNumber = theNumber.addNumber(s);
   //check if the length is valid
-  if(theNumber.isValidLength){
+  if(newNumber.isValidLength){
     //do something
+    print(newNumber.dialCode);//prints +971
+    print(newNumber.internationalNumber);//prints +971565656565
   }
 }
 ```
