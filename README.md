@@ -1,8 +1,7 @@
 ![header](https://i.imgur.com/oSU3rY0.png)
 # the_country_number
 A small library for flutter written in pure dart (doesn't use libphonenumber) which parses a phone number or iso2 code of a country to give you some vitals about the country *(thanks for everyone who contributed to the data [here](https://gist.github.com/Goles/3196253))*
-
-## Example Usage
+#### go *[here](https://github.com/ondbyte/the_country_number_widgets)* for a flutter input widget which is based on this
 this library is a singleton so you can use the library right-away
 ```dart
 final theNumber = TheCountryNumber().parse();
@@ -49,11 +48,11 @@ onChanged(s){
 ```
 *keep in mind that some countries support phone numbers of multiple lengths, which is supported too*
 
-<a href="https://www.buymeacoffee.com/ondbyte" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 Note: This license has also been called the "New BSD License" or "Modified BSD License". See also the 2-clause BSD License.
 
 Copyright 2020 www.yadunandan.xyz
+<a href="https://www.buymeacoffee.com/ondbyte" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
