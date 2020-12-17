@@ -52,6 +52,7 @@ onChanged(s){
 Note: This license has also been called the "New BSD License" or "Modified BSD License". See also the 2-clause BSD License.
 
 Copyright 2020 www.yadunandan.xyz
+
 <a href="https://www.buymeacoffee.com/ondbyte" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
