@@ -22,7 +22,7 @@ print(country.localName);//prints دولة الإمارات العربية ال�
 print(country.currency);//prints AED
 //etc
 ```
-you can parse `TheNumber` with other properties as well but number component will be missing
+you can parse `TheNumber` with other properties as well, but the number component will be missing
 ```dart
 final theNumber = TheCountryNumber().parseNumber(iso2Code: "IN");
 print(theNumber.dialCode);//prints the international dial-code for this country "+91"
@@ -35,14 +35,15 @@ print(country.currency);//prints INR
 ```
 further you can parse realtime in flutter on input data changed
 ```dart
-final theNumber = TheCountryNumber().parse(iso2Code:"AE");
+final numberWithCountryDetails = TheCountryNumber().parse(iso2Code:"AE");
+//parse realtime when data is available
 onChanged(s){
   ///consider s = "565656565";
   if(s.isEmpty()){
     return;
   }
-  final newNumber = theNumber.addNumber(s);
-  //check if the length is valid
+  final newNumber = numberWithCountryDetails.addNumber(s);
+  //check if the length is valid for the given country
   if(newNumber.isValidLength){
     //do something
     print(newNumber.dialCode);//prints +971
