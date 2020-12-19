@@ -9,6 +9,10 @@
 .history
 .svn/
 pubspec.lock
+.fvm/
+.dart_tool/
+the_country_number.iml
+.packages
 
 # IntelliJ related
 *.iml
