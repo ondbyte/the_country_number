@@ -31,14 +31,14 @@ class TheCountryNumber {
             (previousValue, element) => previousValue + element.toString() + "\n");
   }
 
-  TheNumber parseNumber({
-    String internationalNumber,
-    String dialCode,
-    String iso2Code,
-    String iso3Code,
-    String currency,
-    String name,
-    String englishName,
+  TheNumber? parseNumber({
+    String? internationalNumber,
+    String? dialCode,
+    String? iso2Code,
+    String? iso3Code,
+    String? currency,
+    String? name,
+    String? englishName,
   }) {
     if (_countries.isEmpty) throw Exception("library is not initialized");
     if (!isNullOrEmpty(internationalNumber)) {
@@ -46,10 +46,10 @@ class TheCountryNumber {
         if (isNullOrEmpty(element.dialCode)) {
           return false;
         } else {
-          return internationalNumber.startsWith(element.dialCode);
+          return internationalNumber?.startsWith(element.dialCode)??false;
         }
       }, orElse: () {
-        return null;
+        return _TheCountry();
       });
       if (tmp == null) {
         return null;
@@ -66,7 +66,7 @@ class TheCountryNumber {
           return element.dialCode == dialCode;
         }
       }, orElse: () {
-        return null;
+        return _TheCountry();
       });
       if (tmp == null) {
         return null;
@@ -82,11 +82,8 @@ class TheCountryNumber {
           return element.iso2Code == iso2Code;
         }
       }, orElse: () {
-        return null;
+        return _TheCountry();
       });
-      if (tmp == null) {
-        return null;
-      }
       return _getNumberForCountry(tmp);
     }
     if (!isNullOrEmpty(iso3Code)) {
@@ -97,11 +94,8 @@ class TheCountryNumber {
           return element.iso3Code == iso3Code;
         }
       }, orElse: () {
-        return null;
+        return _TheCountry();
       });
-      if (tmp == null) {
-        return null;
-      }
       return _getNumberForCountry(tmp);
     }
     if (!isNullOrEmpty(currency)) {
@@ -112,11 +106,8 @@ class TheCountryNumber {
           return element.currency == currency;
         }
       }, orElse: () {
-        return null;
+        return _TheCountry();
       });
-      if (tmp == null) {
-        return null;
-      }
       return _getNumberForCountry(tmp);
     }
 
@@ -128,7 +119,7 @@ class TheCountryNumber {
           return element.name == name;
         }
       }, orElse: () {
-        return null;
+        return _TheCountry();
       });
       if (tmp == null) {
         return null;
@@ -146,18 +137,15 @@ class TheCountryNumber {
           }
         },
         orElse: () {
-          return null;
+          return _TheCountry();
         },
       );
-      if (tmp == null) {
-        return null;
-      }
       return _getNumberForCountry(tmp);
     }
     return null;
   }
 
-  static bool isNullOrEmpty(String s) {
+  static bool isNullOrEmpty(String? s) {
     if (s == null) {
       return true;
     }
@@ -168,7 +156,7 @@ class TheCountryNumber {
   }
 
   static TheNumber _getNumberForCountry(_TheCountry country,
-      {String internationalNumber}) {
+      {String? internationalNumber}) {
     final _number = internationalNumber != null
         ? internationalNumber.replaceFirst(country.dialCode, "")
         : "";
@@ -198,15 +186,14 @@ class TheNumber {
         this.dialCode = "",
         this.number = "",
         this.internationalNumber = "",
-        @required this.country}) {
-    assert(country != null);
-  }
+        this.country= const TheCountry(_TheCountry()),
+        });
 
-  TheNumber addNumber(String s) {
+  TheNumber? addNumber(String s) {
     return TheCountryNumber().parseNumber(internationalNumber: dialCode + s);
   }
 
-  TheNumber removeNumber() {
+  TheNumber? removeNumber() {
     return TheCountryNumber().parseNumber(iso2Code: this.country.iso2);
   }
 
@@ -229,7 +216,7 @@ class TheNumber {
 
 class TheCountry {
   final _TheCountry _country;
-  TheCountry(this._country);
+  const TheCountry(this._country);
 
   String get iso2 => _country.iso2Code;
 
@@ -266,27 +253,28 @@ class _TheCountry {
   final String capital;
   final List<int> dialLengths;
 
-  _TheCountry({
-    this.name,
-    this.dialCode,
-    this.iso2Code,
-    this.englishName,
-    this.iso3Code,
-    this.currency,
-    this.capital,
-    this.dialLengths,
+  const _TheCountry({
+    this.name="",
+    this.dialCode="",
+    this.iso2Code="",
+    this.englishName="",
+    this.iso3Code="",
+    this.currency="",
+    this.capital="",
+    this.dialLengths=const [],
   });
+
 
   static fromJson(Map<String, dynamic> j) {
     return _TheCountry(
-      name: j["Name"],
-      dialCode: j["DialCode"],
-      iso2Code: j["Iso2"],
-      englishName: j["EnglishName"],
-      iso3Code: j["Iso3"],
-      currency: j["Currency"],
-      capital: j["Capital"],
-      dialLengths: List.castFrom(getDialLengths(j["DialLength"])),
+      name: j["Name"]??"",
+      dialCode: j["DialCode"]??"",
+      iso2Code: j["Iso2"]??"",
+      englishName: j["EnglishName"]??"",
+      iso3Code: j["Iso3"]??"",
+      currency: j["Currency"]??"",
+      capital: j["Capital"]??"",
+      dialLengths: List.castFrom(getDialLengths(j["DialLength"]??"",)),
     );
   }
 
@@ -301,7 +289,7 @@ class _TheCountry {
       return [d];
     }
     if (d is Iterable) {
-      return List.castFrom(d);
+      return List.castFrom(d as List);
     }
     return [];
   }
