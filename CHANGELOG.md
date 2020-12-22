@@ -4,5 +4,5 @@
 
 ## [0.9.1] - 22-12-2020 (dd-mm-yyyy).
 
-* Now supports dart null-safety, use this version if prefer using null safety
+* Now supports dart null-safety, use this version if you prefer using null safety, Code is well documented.
 
