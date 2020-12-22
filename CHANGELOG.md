@@ -6,7 +6,7 @@
 
 * Now supports dart null-safety, use this version if you prefer using null safety, Code is well documented.
 
-## [0.9.2+1] - 22-12-2020 (dd-mm-yyyy).
+## [0.9.2+2] - 22-12-2020 (dd-mm-yyyy).
 
 * Added example.
 

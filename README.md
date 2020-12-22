@@ -6,7 +6,6 @@ A small library for flutter written in pure dart (doesn't use libphonenumber) wh
 *if you need to skip null-safety, use version 0.9.0*
 
 this library is a singleton so you can use the library right-away
-```dart this library is a singleton so you can use the library right-away
 ```dart
 final theNumber = TheCountryNumber().parse();
 ```
