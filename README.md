@@ -2,60 +2,9 @@
 # the_country_number
 A small library for flutter written in pure dart (doesn't use libphonenumber) which parses a phone number or iso2 code of a country to give you some vitals about the country *(thanks for everyone who contributed to the data [here](https://gist.github.com/Goles/3196253))*
 #### go *[here](https://github.com/ondbyte/the_country_number_widgets)* for a flutter input widget which is based on this
-
-*if you need to skip null-safety, use version 0.9.0*
-
+*use version 0.9.0 to skip nullsafety*
 this library is a singleton so you can use the library right-away
 ```dart
-final theNumber = TheCountryNumber().parse();
-```
-if you have the complete international number as string
-```dart
-//a united arab emirates number
-final _numberString = "+971565656565";
-final theNumber = TheCountryNumber().parse(internationalNumber:_numberString);
-print(theNumber.dialCode);//prints +971
-print(theNumber.number);//prints 565656565
-```
-further the parsed number contains a `TheCountry` object which provides some useful vitals
-```dart
-final country = theNumber.country;
-print(country.englishName);//prints United Arab Emirates
-print(country.localName);//prints دولة الإمارات العربية المتحدة (hope spelling is correct)
-print(country.currency);//prints AED
-//etc
-```
-you can parse `TheNumber` with other properties as well, but the number component will be missing
-```dart
-final theNumber = TheCountryNumber().parseNumber(iso2Code: "IN");
-print(theNumber.dialCode);//prints the international dial-code for this country "+91"
-print(theNumber.number); //prints empty
-//access country details
-final country = theNumber.country;
-print(country.englishName);//prints India
-print(country.localName);//prints भारत (hope spelling is correct)
-print(country.currency);//prints INR
-```
-further you can parse realtime in flutter on input data changed
-```dart
-final numberWithCountryDetails = TheCountryNumber().parse(iso2Code:"AE");
-//parse realtime when data is available
-onChanged(s){
-  ///consider s = "565656565";
-  if(s.isEmpty()){
-    return;
-  }
-  final newNumber = numberWithCountryDetails.addNumber(s);
-  //check if the length is valid for the given country
-  if(newNumber.isValidLength){
-    //do something
-    print(newNumber.dialCode);//prints +971
-    print(newNumber.internationalNumber);//prints +971565656565
-  }
-}
-```
-*keep in mind that some countries support phone numbers of multiple lengths, which is supported too*
-
 final theNumber = TheCountryNumber().parse();
 ```
 if you have the complete international number as string
