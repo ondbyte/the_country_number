@@ -53,6 +53,14 @@ onChanged(s){
   }
 }
 ```
+A  `NotANumber` object will be returned if failed to parse, you can check if the return Object is not a number
+```dart
+final theSupposedNumber = TheCountryNumber().parse(iso2Code:"xxxxxx");
+if(theSupposedNumber.isNotANumber){
+  //cancel operation
+  return;
+}
+```
 *keep in mind that some countries support phone numbers of multiple lengths, which is supported too*
 
 

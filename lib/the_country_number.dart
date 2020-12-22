@@ -76,9 +76,9 @@ class TheCountryNumber {
   /// print(country.localName);//prints भारत (hope spelling is correct)
   /// print(country.currency);//prints INR
   ///```
-  /// If the library is unable to parse (which effectively means no data exists for the given parsable data) a `null` value
-  /// will be returned
-  TheNumber? parseNumber({
+  /// If the library is unable to parse (which effectively means no data exists for the given parsable data) a [NotANumber] value
+  /// will be returned, call [TheNumber.isNotANumber] to check is its a valid [TheNumber]
+  TheNumber parseNumber({
     String? internationalNumber,
     String? dialCode,
     String? iso2Code,
@@ -189,7 +189,7 @@ class TheCountryNumber {
       );
       return _getNumberForCountry(tmp);
     }
-    return null;
+    return NotANumber();
   }
 
   static bool _isNullOrEmpty(String? s) {
@@ -260,6 +260,10 @@ class TheNumber {
   ///Returns new [TheNumber] by removing the [number] component
   TheNumber? removeNumber() {
     return TheCountryNumber().parseNumber(iso2Code: this.country.iso2);
+  }
+
+  bool isNotANumber(){
+    return false;
   }
 
   @override
@@ -372,5 +376,12 @@ class _TheCountry {
   @override
   String toString() {
     return '''$name\n$dialCode\n$iso2Code\n$englishName\n$iso3Code\n$currency\n$capital\n$dialLengths;''';
+  }
+}
+///A class that will be returned when parsing fails
+class NotANumber extends TheNumber{
+  @override
+  bool isNotANumber() {
+    return true;
   }
 }

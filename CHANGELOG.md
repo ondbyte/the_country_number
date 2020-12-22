@@ -9,4 +9,8 @@
 ## [0.9.2+3] - 22-12-2020 (dd-mm-yyyy).
 
 * Added example.
+* 
+## [0.9.2+4] - 22-12-2020 (dd-mm-yyyy).
+
+* parsing returns a `NotANumber` object if it is unable to parse the given data
 

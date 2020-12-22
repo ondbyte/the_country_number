@@ -9,13 +9,23 @@ void main(){
   //
   //get details about s
   final sNumber = TheCountryNumber().parseNumber(internationalNumber: s);
-  print(sNumber?.isValidLength); //prints true
-  print(sNumber?.country.englishName);//prints india
-  print(sNumber?.hasNumber);//prints true
+  //check if the value is actually a TheNumber
+  if(sNumber.isNotANumber()){
+    //not a TheNumber
+    return;
+  }
+  print(sNumber.isValidLength); //prints true
+  print(sNumber.country.englishName);//prints india
+  print(sNumber.hasNumber);//prints true
   //
   //get details about s
   final bNumber = TheCountryNumber().parseNumber(dialCode: b);
-  print(bNumber?.isValidLength); //prints false
-  print(bNumber?.country.englishName);//prints india
-  print(bNumber?.hasNumber);//prints false
+  //check if the value is actually a TheNumber
+  if(bNumber.isNotANumber()){
+    //not a TheNumber
+    return;
+  }
+  print(bNumber.isValidLength); //prints false
+  print(bNumber.country.englishName);//prints india
+  print(bNumber.hasNumber);//prints false
 }
