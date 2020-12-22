@@ -1,6 +1,6 @@
 name: the_country_number
 description: A small library for flutter written in pure dart (doesn't use libphonenumber) which parses a phone number or iso2 code of a country to give you some vitals about the country
-version: 0.9.0
+version: 0.9.1
 homepage: https://github.com/ondbyte/the_country_number
 
 environment:
