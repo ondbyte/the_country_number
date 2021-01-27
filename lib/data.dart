@@ -1,4 +1,4 @@
-String data = '''[
+const String data = '''[
   {
     "Name": "افغانستان",
     "DialCode": "+93",

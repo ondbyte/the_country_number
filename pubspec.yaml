@@ -5,14 +5,9 @@ homepage: https://github.com/ondbyte/the_country_number
 
 environment:
   sdk: ">=2.12.0-0 <3.0.0"
-  flutter: ">=1.17.0"
 
-dependencies:
-  flutter:
-    sdk: flutter
+#dependencies:
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  test:
 
-flutter:

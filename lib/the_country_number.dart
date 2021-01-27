@@ -3,7 +3,7 @@ library the_country_number;
 ///A library to
 import 'dart:convert';
 
-import 'package:the_country_number/data.dart';
+import 'data.dart';
 
 ///A small library for flutter written in pure dart (doesn't use libphonenumber)
 ///which parses a phone number or iso2 code of a country to give you some vitals about the country,
@@ -262,7 +262,7 @@ class TheNumber {
     return TheCountryNumber().parseNumber(iso2Code: this.country.iso2);
   }
 
-  bool isNotANumber(){
+  bool isNotANumber() {
     return false;
   }
 
@@ -281,6 +281,12 @@ class TheNumber {
 
   @override
   int get hashCode => internationalNumber.hashCode;
+
+  bool get isPlainNumber => false;
+
+  static PlainNumber plainNumber(String number) {
+    return PlainNumber(number);
+  }
 }
 
 ///Class having all the vitals about a Country
@@ -378,10 +384,24 @@ class _TheCountry {
     return '''$name\n$dialCode\n$iso2Code\n$englishName\n$iso3Code\n$currency\n$capital\n$dialLengths;''';
   }
 }
+
 ///A class that will be returned when parsing fails
-class NotANumber extends TheNumber{
+class NotANumber extends TheNumber {
   @override
   bool isNotANumber() {
     return true;
   }
+}
+
+class PlainNumber extends TheNumber {
+  final String _uNumber;
+
+  PlainNumber(this._uNumber);
+
+  String get number => _uNumber;
+
+  String get internationalNumber => _uNumber;
+
+  @override
+  bool get isPlainNumber => true;
 }
