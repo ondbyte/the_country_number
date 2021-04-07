@@ -26,7 +26,12 @@ class TheCountryNumber {
     final dataJ = json.decode(data) as List;
     dataJ.forEach(
       (element) {
-        _countries.add(_TheCountry._fromJson(element));
+        try {
+          final c = _TheCountry._fromJson(element);
+          _countries.add(c);
+        } catch (e) {
+          print("error parsing element $element to country");
+        }
       },
     );
   }
@@ -349,34 +354,45 @@ class _TheCountry {
   });
 
   static _fromJson(Map<String, dynamic> j) {
-    return _TheCountry(
-      name: j["Name"] ?? "",
-      dialCode: j["DialCode"] ?? "",
-      iso2Code: j["Iso2"] ?? "",
-      englishName: j["EnglishName"] ?? "",
-      iso3Code: j["Iso3"] ?? "",
-      currency: j["Currency"] ?? "",
-      capital: j["Capital"] ?? "",
-      dialLengths: List.castFrom(_getDialLengths(
-        j["DialLength"] ?? "",
-      )),
-    );
+    try {
+      final lengths = _getDialLengths(
+        j["DialLength"],
+      );
+      return _TheCountry(
+        name: j["Name"] ?? "",
+        dialCode: j["DialCode"] ?? "",
+        iso2Code: j["Iso2"] ?? "",
+        englishName: j["EnglishName"] ?? "",
+        iso3Code: j["Iso3"] ?? "",
+        currency: j["Currency"] ?? "",
+        capital: j["Capital"] ?? "",
+        dialLengths: List.castFrom(
+          lengths,
+        ),
+      );
+    } catch (e) {
+      rethrow;
+    }
   }
 
   static List<int> _getDialLengths(dynamic d) {
-    if (d is String) {
-      return [int.parse(d)];
-    }
-    if (d is int) {
-      if (d == -1) {
-        return [];
+    try {
+      if (d is String) {
+        return [int.parse(d)];
       }
-      return [d];
+      if (d is int) {
+        if (d == -1) {
+          return [];
+        }
+        return [d];
+      }
+      if (d is Iterable) {
+        return List.castFrom(d as List);
+      }
+      return [];
+    } catch (e) {
+      rethrow;
     }
-    if (d is Iterable) {
-      return List.castFrom(d as List);
-    }
-    return [];
   }
 
   @override
